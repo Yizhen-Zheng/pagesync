@@ -6,6 +6,7 @@ export default function Home() {
       <Button variant={"outline"} size={"lg"}>
         click me
       </Button>
+      <h1 className="">hellpwor</h1>
     </div>
   );
 }
