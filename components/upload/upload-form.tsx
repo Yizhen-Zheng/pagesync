@@ -2,6 +2,7 @@
 import { useUploadThing } from "@/utils/uploadthing";
 import UploadFormInput from "./upload-form-input";
 import { z } from "zod";
+import { toast } from "sonner";
 
 // everything requires the browser is going to be client
 
@@ -22,28 +23,47 @@ export default function UploadForm() {
       console.log("uploaded successfully!");
     },
     onUploadError: (err) => {
-      console.error("error occurred while uploading", err);
+      toast.error("Error occurred while uploading", {
+        description: err.message,
+      });
     },
     onUploadBegin: ({ file }) => {
       console.log("upload has begun for", file);
     },
   });
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const file = formData.get("file") as File;
 
-    // schema validation (zod)
     const validatedFileds = schema.safeParse({ file });
-    console.log(validatedFileds);
+
     if (!validatedFileds.success) {
-      console.log(
-        validatedFileds.error.flatten().fieldErrors.file?.[0] ?? "Invalid file"
-      );
-      //   return;
+      toast.error("Something went wrong", {
+        description:
+          validatedFileds.error.flatten().fieldErrors.file?.[0] ??
+          "Invalid file",
+      });
+      return;
     }
 
-    // TODO: upload to uploadthing
+    toast.message("Uploading PDF...", {
+      description: "We are uploading your PDF to our server",
+    });
+
+    const resp = await startUpload([file]);
+    if (!resp) {
+      toast.error("Something went wrong", {
+        description: "Please use a different file",
+      });
+      return;
+    }
+
+    toast.message("Processing PDF...", {
+      description: "The AI is reading your PDF. This may take a while",
+    });
+
+    // parse use langchain
     // pass to ai
     // TODO: save to db
     // TODO: redirect to the [id] summary page
