@@ -3,6 +3,7 @@ import { useUploadThing } from "@/utils/uploadthing";
 import UploadFormInput from "./upload-form-input";
 import { z } from "zod";
 import { toast } from "sonner";
+import { generatePdfSummary } from "@/actions/upload-actions";
 
 // everything requires the browser is going to be client
 
@@ -63,7 +64,7 @@ export default function UploadForm() {
       description: "The AI is reading your PDF. This may take a while",
     });
 
-    // parse use langchain
+    const summary = await generatePdfSummary(resp);
     // pass to ai
     // TODO: save to db
     // TODO: redirect to the [id] summary page
