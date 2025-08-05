@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Plus, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import SummaryCard from "@/components/summaries/summary-card";
-import { getSummaries } from "@/lib/summaries";
+import { getSummariesByUserId } from "@/lib/summaries";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import EmptySummaryState from "@/components/summaries/empty-summary-state";
@@ -14,7 +14,7 @@ export default async function Page() {
     return redirect("/sign-in");
   }
   const uploadLimit = 5;
-  const summaries = await getSummaries(user.id);
+  const summaries = await getSummariesByUserId(user.id);
   return (
     <main>
       <BgGradient className="from-emerald-200 via-teal-200 to-cyan-200"></BgGradient>

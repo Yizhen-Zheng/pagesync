@@ -1,18 +1,15 @@
 "use server";
-import { getDbConnection } from "@/lib/db";
 import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
+import { deleteSummariesById } from "@/lib/summaries";
 
 export async function deleteSummaryAction(summaryId: string) {
   try {
-    const sql = await getDbConnection();
     const user = await currentUser();
     if (!user?.id) {
       throw new Error("User not found");
     }
-
-    const result =
-      await sql`DELETE FROM pdf_summaries WHERE id = ${summaryId} AND user_id = ${user.id} RETURNING id;`;
+    const result = await deleteSummariesById(summaryId, user.id);
 
     if (result.length > 0) {
       revalidatePath("/dashboard");

@@ -22,7 +22,7 @@ export async function generateSummaryFromOpenAI(pdfText: string) {
       max_tokens: 1500,
       top_p: 1,
     });
-    console.log(response);
+
     return response.choices[0].message.content;
   } catch (error: any) {
     if (error?.status === 429) {

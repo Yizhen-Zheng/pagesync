@@ -30,7 +30,7 @@ export default function UploadForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { startUpload, routeConfig } = useUploadThing("pdfUploader", {
     onClientUploadComplete: () => {
-      console.log("uploaded successfully!");
+      toast.success("Uploaded successfully");
     },
     onUploadError: (err) => {
       toast.error("Error occurred while uploading", {
@@ -38,7 +38,7 @@ export default function UploadForm() {
       });
     },
     onUploadBegin: () => {
-      console.log("upload has begun for your file");
+      toast.success("upload has begun for your file");
     },
   });
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -75,7 +75,7 @@ export default function UploadForm() {
       });
       const uploadThingServerData = resp[0].serverData;
       const result = await generatePdfSummary(uploadThingServerData);
-      console.log(result, "generatePdfSummary");
+
       const { success, message, data } = result;
       if (data) {
         let storePDFSummaryActionResult;

@@ -15,7 +15,7 @@ export async function generateSummaryFromGemini(pdfText: string) {
       `${SUMMARY_SYSTEM_PROMPT}\n\n\nTransform this document into an engaging, easy-to-read summary with contextually relevant emojis and proper markdown formatting: \n\n${pdfText}`
     );
     const response = await result.response;
-    console.log(response);
+
     return response.text();
   } catch (error: any) {
     if (error?.status === 429) {
