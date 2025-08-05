@@ -4,7 +4,7 @@ export default function BgGradient({ className }: { className?: string }) {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-x-0 -z-0 -top-40 transform-gpu overflow-hidden blur-3xl sm:-top-30"
+      className="pointer-events-none absolute inset-x-0 -z-10 -top-40 transform-gpu overflow-hidden blur-3xl sm:-top-30"
     >
       <div
         style={{

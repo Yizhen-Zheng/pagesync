@@ -1,9 +1,20 @@
 import BgGradient from "@/components/common/bg-gradient";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import SummaryCard from "@/components/summaries/summary-card";
+import { getSummaries } from "@/lib/summaries";
+import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+import EmptySummaryState from "@/components/summaries/empty-summary-state";
 
-export default function Page() {
+export default async function Page() {
+  const user = await currentUser();
+  if (!user?.id) {
+    return redirect("/sign-in");
+  }
+  const uploadLimit = 5;
+  const summaries = await getSummaries(user.id);
   return (
     <main>
       <BgGradient className="from-emerald-200 via-teal-200 to-cyan-200"></BgGradient>
@@ -31,6 +42,31 @@ export default function Page() {
               </Link>
             </Button>
           </div>
+          <div className="mb-6">
+            <div className="bg-rose-50 border border-rose-200 rounded-lg p-4 text-rose-800 ">
+              <p className="text-sm">
+                You've reached the limit of {uploadLimit} summaries on the Basic
+                plan.{" "}
+                <Link
+                  href="/#pricing"
+                  className="text-rose-800 underline font-medium underline-offset-4 inline-flex items-center"
+                >
+                  Click here to upgrade
+                  <ArrowRight className="w-4 h-4 inline-block"></ArrowRight>
+                </Link>
+                for unlimited summaries.
+              </p>
+            </div>
+          </div>
+          {summaries.length === 0 ? (
+            <EmptySummaryState />
+          ) : (
+            <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 sm:px-0">
+              {summaries.map((summary, i) => (
+                <SummaryCard key={i} summary={summary} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </main>

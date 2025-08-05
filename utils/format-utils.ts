@@ -9,3 +9,12 @@ export function formatFileNameAsTitle(fileName: string): string {
     .trim();
   return titleCase;
 }
+
+export function formatDisplayTitle(url: string): string {
+  const fileName = url.split("/").pop() || "";
+
+  if (fileName) {
+    return formatFileNameAsTitle(fileName);
+  }
+  return "";
+}

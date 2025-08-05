@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { forwardRef } from "react";
 
