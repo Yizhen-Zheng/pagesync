@@ -7,13 +7,21 @@ export interface PDFSummaryType {
   title: string;
   fileName: string;
 }
-
+//-------------------- GET --------------------
 export async function getSummariesByUserId(userId: string) {
   const sql = await getDbConnection();
   const summaries =
     await sql`SELECT * FROM pdf_summaries WHERE user_id = ${userId} ORDER BY created_at DESC`;
   return summaries;
 }
+
+export async function getSummaryById(id: string, userId: string) {
+  const sql = await getDbConnection();
+  const summary =
+    await sql`SELECT * FROM pdf_summaries WHERE id = ${id} AND user_id = ${userId}`;
+  return summary;
+}
+
 export async function deleteSummariesById(summaryId: string, userId: string) {
   const sql = await getDbConnection();
   const result =
