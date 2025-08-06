@@ -19,7 +19,7 @@ export async function getSummaryById(id: string, userId: string) {
   const sql = await getDbConnection();
   const summary =
     await sql`SELECT * FROM pdf_summaries WHERE id = ${id} AND user_id = ${userId}`;
-  return summary;
+  return summary[0];
 }
 
 export async function deleteSummariesById(summaryId: string, userId: string) {
