@@ -120,7 +120,7 @@ CREATE TABLE pdf_summaries (
 |   ├── gemini.ts, openai.tx # call gemini/openai api
 |   ├── langchain.ts # parse PDF to text
 |   ├── payment.ts, user.ts, summaries.ts # basic db operation(use db obj from db.ts)
-|   ├── db.ts # db object
+|   ├── subscription.ts # use above db operation and Stripe obj, read session from Stripe and update db
 ├── utils/                 # Helper functions
 └── actions/              # Server actions
 ```

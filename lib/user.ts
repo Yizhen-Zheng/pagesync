@@ -26,6 +26,28 @@ export const CreateOrUpdateUser = async ({
     }
   } catch (error) {
     console.error(`Error creating or updating user: ${error}`);
-    throw new Error(`Failed to create or update user: ${error}`);
+    throw error;
+  }
+};
+
+export const updateCancelledUser = async ({
+  customer_id,
+}: {
+  customer_id: string;
+}) => {
+  console.log("update user status to cancelled:");
+  console.log(customer_id);
+  try {
+    const sql = await getDbConnection();
+    const res = await sql`
+        UPDATE users
+        SET status = 'cancelled'
+        WHERE customer_id = ${customer_id}
+        RETURNING *
+        `;
+    console.log(`User updated: ${res[0]}`);
+  } catch (error) {
+    console.error(`Error updating user status: ${error}`);
+    throw error;
   }
 };
