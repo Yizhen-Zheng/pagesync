@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import DeleteButton from "./delete-buton";
 import Link from "next/link";
 import { FileText } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/tailwind-utils";
 import { formatDistanceToNow } from "date-fns/formatDistanceToNow";
 import { formatDisplayTitle } from "@/utils/format-utils";
 

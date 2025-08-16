@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/tailwind-utils";
 import { usePathname } from "next/navigation";
 export default function NavLink({
   href,

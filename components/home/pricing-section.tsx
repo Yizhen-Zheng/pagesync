@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/tailwind-utils";
 import { Check } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 const plans = [
