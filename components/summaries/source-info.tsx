@@ -1,5 +1,6 @@
 import { FileText, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { DownloadSummaryButton } from "./download-summary-button";
 import Link from "next/link";
 
 export function SourceInfo({
@@ -11,9 +12,9 @@ export function SourceInfo({
 }: {
   file_name: string;
   original_file_url: string;
-  created_at?: string;
-  title?: string;
-  summary_text?: string;
+  created_at: string;
+  title: string;
+  summary_text: string;
 }) {
   return (
     <div className="flex flex-col lg:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
@@ -33,6 +34,13 @@ export function SourceInfo({
             View Original
           </a>
         </Button>
+        <DownloadSummaryButton
+          title={title}
+          summary_text={summary_text}
+          file_name={file_name}
+          created_at={created_at}
+          original_file_url={original_file_url}
+        />
       </div>
     </div>
   );
