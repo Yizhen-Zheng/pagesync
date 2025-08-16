@@ -116,6 +116,11 @@ CREATE TABLE pdf_summaries (
 │   ├── ui/               # shadcn/ui components
 │   └── upload/           # Upload components
 ├── lib/                   # Utility libraries
+|   ├── db.ts # db object
+|   ├── gemini.ts, openai.tx # call gemini/openai api
+|   ├── langchain.ts # parse PDF to text
+|   ├── payment.ts, user.ts, summaries.ts # basic db operation(use db obj from db.ts)
+|   ├── db.ts # db object
 ├── utils/                 # Helper functions
 └── actions/              # Server actions
 ```
