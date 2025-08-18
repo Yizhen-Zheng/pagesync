@@ -14,8 +14,6 @@ export const createPayment = async ({
   email: string;
   status: string;
 }) => {
-  console.log("Creating payment record:");
-  console.log(session_id, amount_total, priceId, email, status);
   try {
     const sql = await getDbConnection();
     const payment = await sql`

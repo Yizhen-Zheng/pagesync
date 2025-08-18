@@ -6,7 +6,6 @@ function EmojiPoint({ point }: { point: string }) {
     return null;
   }
   const { emoji, text } = parsed;
-  console.log("Parsed emoji:", emoji, "Text:", text);
   return (
     <div className="group relative bg-linear-to-br from-gray-200/[0.08] to-gray-400/[0.03] p-4 rounded-2xl border border-gray-500/10  hover:shadow-lg transition-all ">
       <div className=" absolute inset-0 bg-linear-to-r from-gray-100/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>

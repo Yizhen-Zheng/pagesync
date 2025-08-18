@@ -18,7 +18,6 @@ export const handleCheckoutSessionCompleted = async ({
       return;
     }
     const email = session.customer_email || session.customer_details?.email;
-    console.log("STRIPE email:", email);
     if (!email) {
       console.error(`No email found for customer ID ${customerId}`);
       return;
@@ -38,7 +37,6 @@ export const handleCheckoutSessionCompleted = async ({
       priceId: priceId || "",
       status: status,
     });
-    console.log(`User created or updated: ${user}`);
     // Create a payment record
     const payment = await createPayment({
       session_id: session_id,
@@ -47,7 +45,6 @@ export const handleCheckoutSessionCompleted = async ({
       email: email,
       status: status || "",
     });
-    console.log(`Payment created: ${payment}`);
     //------------ Finish of DB operations ------------
   } catch (error) {
     console.error(`Error retrieving session: ${error}`);
@@ -68,9 +65,6 @@ export const handleSubscriptionDeleted = async ({
     const customerId = subscription.customer as string;
     // Update user status to 'cancelled'
     await updateCancelledUser({ customer_id: customerId });
-    console.log(
-      `User with customer ID ${customerId} has been updated to cancelled.`
-    );
   } catch (error) {
     console.error(`Error handling subscription deletion: ${error}`);
     throw error;

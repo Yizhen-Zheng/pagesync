@@ -1,6 +1,6 @@
 import { SignUp } from "@clerk/nextjs";
 import BgGradient from "@/components/common/bg-gradient";
-
+// TODO: update signup process, add user in clerk into db
 export default function Page() {
   return (
     <section className="flex justify-center items-center lg:min-h-[40vh]">

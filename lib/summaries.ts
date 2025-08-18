@@ -48,3 +48,15 @@ export async function savePDFSummary({
     };
   }
 }
+
+export async function getUserUploadCount(userId: string) {
+  const sql = await getDbConnection();
+  try {
+    const count =
+      await sql`SELECT COUNT(*) FROM pdf_summaries WHERE user_id = ${userId}`;
+    return count[0].count;
+  } catch (error) {
+    console.error(`Error retrieving user upload count: ${error}`);
+    return 0;
+  }
+}

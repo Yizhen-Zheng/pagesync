@@ -12,12 +12,10 @@ export async function PlanBadge() {
   const user = await currentUser();
   if (user) {
     const email = user.emailAddresses[0].emailAddress;
-    const priceId = await getUserByEmail(email, ["price_id"]);
-    const plan = priceId
-      ? plans.find((plan) => plan.priceId === priceId.price_id)
+    const userInfo = await getUserByEmail(email, ["price_id"]);
+    const plan = userInfo
+      ? plans.find((plan) => plan.priceId === userInfo.price_id)
       : null;
-    console.log("user", user);
-    console.log("userPlan", priceId);
     if (plan) {
       planName = plan.name;
       hasPlan = true;
