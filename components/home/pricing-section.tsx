@@ -2,44 +2,9 @@ import Link from "next/link";
 import { cn } from "@/utils/tailwind-utils";
 import { Check } from "lucide-react";
 import { ArrowRight } from "lucide-react";
-const plans = [
-  {
-    id: "basic",
-    name: "Basic",
-    price: 9,
-    items: [
-      "5 PDF summaries per month",
-      "Standard processing speed",
-      "Email support",
-    ],
-    description: "Perfect for occasional use",
-    paymentLink: "",
-    priceId: "",
-  },
-  {
-    id: "pro",
-    name: "Pro",
-    price: 19,
-    items: [
-      "Unlimited PDF summaries",
-      "Priority processing",
-      "24/7 priority support",
-      "Markdown export",
-    ],
-    description: "For professionals and teams",
-    paymentLink: "",
-    priceId: "",
-  },
-];
-type Plan = {
-  id: string;
-  name: string;
-  price: number;
-  items: string[];
-  description: string;
-  paymentLink: string;
-  priceId: string;
-};
+import { Plan } from "@/utils/constants";
+import { plans } from "@/utils/constants";
+
 export default function PricingSection() {
   return (
     <section className="relative overflow-hidden" id="pricing">

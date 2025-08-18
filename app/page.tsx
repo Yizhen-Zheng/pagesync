@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className=" relative w-full">
       <BgGradient />
-      {/* ! //TODO: checkout later: how css layers work (bg div -> children) !*/}
+
       <div className="flex flex-col ">
         <HeroSection />
         <DemoSection />

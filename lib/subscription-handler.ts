@@ -18,6 +18,7 @@ export const handleCheckoutSessionCompleted = async ({
       return;
     }
     const email = session.customer_email || session.customer_details?.email;
+    console.log("STRIPE email:", email);
     if (!email) {
       console.error(`No email found for customer ID ${customerId}`);
       return;

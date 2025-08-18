@@ -51,3 +51,20 @@ export const updateCancelledUser = async ({
     throw error;
   }
 };
+
+export const getUserByEmail = async (email: string, fields: string[] = []) => {
+  try {
+    const sql = await getDbConnection();
+    const user = await sql`SELECT * FROM users WHERE email = ${email}`;
+    if (user.length === 0) {
+      throw new Error(`User with email ${email} not found`);
+    }
+    if (fields.length === 0) {
+      return user[0];
+    }
+    return Object.fromEntries(fields.map((key) => [key, user[0][key]]));
+  } catch (error) {
+    console.error(`Error retrieving user: ${error}`);
+    return null;
+  }
+};
